@@ -1,3 +1,6 @@
+require_relative 'crm_assignment'
+
+
 class CRM
 
   def initialize
@@ -22,31 +25,81 @@ class CRM
     puts 'Enter a number: '
   end
 
-  def call_option
-
+  def call_option(user_selected)
+    case user_selected
+    when 1 then add_new_contact
+    when 2 then modify_existing_contact
+    when 3 then delete_contact
+    when 4 then display_all_contacts
+    when 5 then search_by_attribute
+    when 6 then return
+    # Finish off the rest for 3 through 6
+    # To be clear, the methods add_new_contact and modify_existing_contact
+    # haven't been implemented yet
+    end
   end
 
-  def add_new_contact
+  def add_new_contact()
+    print 'Enter First Name: '
+    first_name = gets.chomp
 
+    print 'Enter Last Name: '
+    last_name = gets.chomp
+
+    print 'Enter Email Address: '
+    email = gets.chomp
+
+    print 'Enter a Note: '
+    note = gets.chomp
+
+    Contact.create(first_name, last_name, email, note)
   end
 
-  def modify_existing_contact
+  def modify_existing_contact()
 
+    print 'what attribute would you want to modify: '
+    attribute = gets.chomp
+    print 'whats one quality of the person you want to change? '
+    value = gets.chomp
+    contact_info = Contact.find_by(attribute, value)
+
+    if attribute == 'first name'
+      print 'what would you want to change the first name to? '
+      new_first_name = gets.chomp
+      return contact_info.update('first name', new_first_name)
+
+    elsif attribute == 'last name'
+      print 'what would you like to change the lastname to? '
+      new_last_name = gets.chomp
+      return contact_info.update('last name', new_last_name)
+
+    elsif attribute == 'email'
+      print 'what would you like to change the email to? '
+      new_email = gets.chomp
+      return contact_info.update('email', new_email)
+
+    end
   end
 
-  def delete_contact
+  def delete_contact()
+    print 'whats the id of the contact to delete? '
+    id = gets.chomp
+    contact_info = Contact.find(id)
+    contact_info.delete()
 
   end
 
   # This method should accept as an argument an array of contacts
   # and display each contact in that array
-  def display_contacts
-
+  def display_contacts(array_of_contents)
+    array_of_contents.each do |content|
+      print content 
     # HINT: Make use of this method in the display_all_contacts and search_by_attribute methods to keep your code DRY
   end
 
-  def display_all_contacts
-    
+  def display_all_contacts()
+    all_contacts = Contact.all
+
     # HINT: Make use of the display_contacts method to keep your code DRY
   end
 
@@ -58,3 +111,15 @@ class CRM
   # Add other methods here, if you need them.
 
 end
+
+
+crm = CRM.new 
+# puts crm.modify_existing_contact
+
+
+
+
+
+
+
+
