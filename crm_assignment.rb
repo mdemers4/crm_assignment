@@ -86,7 +86,6 @@ class Contact
 		else
 			"the attribute #{attribute} is not searchable, try again"
 			self.find_by()
-
 		end
 	end
 
