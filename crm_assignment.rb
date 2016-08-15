@@ -49,7 +49,7 @@ class Contact
 	def self.find(id)
 		@@contacts.each do |contact|
 			if contact.id == id
-				return [contact.first_name, contact.last_name, contact.email, contact.note, contact.id]
+				return contact #[contact.first_name, contact.last_name, contact.email, contact.note, contact.id]
 			end
 		end
 		return "This id does not exist"
@@ -57,34 +57,30 @@ class Contact
 
 
 
-	def self.find_by()
-		puts "what attribute are you searching for?"
-		attribute = gets.chomp
+	def self.find_by(attribute, value)
+
 		if attribute == "first name"
-			puts "what is their first name?"
-			f_name = gets.chomp
+
 			@@contacts.each do |contact|
-				if f_name == contact.first_name
-					return [contact.first_name, contact.last_name, contact.email, contact.note, contact.id]
+				if value == contact.first_name
+					return contact #[contact.first_name, contact.last_name, contact.email, contact.note, contact.id]
 				end
 			end
 			
 		elsif attribute == "last name"
-			puts "what is their last name?"
-			l_name = gets.chomp
+
 			@@contacts.each do |contact|
-				if l_name == contact.last_name
-					return [contact.first_name, contact.last_name, contact.email, contact.note, contact.id]
+				if value == contact.last_name
+					return contact #[contact.first_name, contact.last_name, contact.email, contact.note, contact.id]
 				end
 			end
 
 
 		elsif attribute == "email"
-			puts "what is their email?"
-			email = gets.chomp
+
 			@@contacts.each do |contact|
-				if email == contact.email
-					return [contact.first_name, contact.last_name, contact.email, contact.note, contact.id]
+				if value == contact.email
+					return contact #[contact.first_name, contact.last_name, contact.email, contact.note, contact.id]
 				end
 			end
 		else
@@ -122,15 +118,15 @@ class Contact
 end
 
 contact = Contact.new("mitch", "demers", "m@gmail.com")
-contact.update ("first_name", "timmy")
 contact2 = Contact.new("john", "smith", "ms@gmail.com")
 contact3 = Contact.new("jonny", "smither", "mss@gmail.com")
 contact4 = Contact.new("jonnyy", "smithera", "mssa@gmail.com")
-puts contact2.delete()
-#puts Contact.create("first_name", "last_name", "msms@m", "note")
-#puts Contact.all
-#contact.first_name = "john"
-puts Contact.find(2) 
-#puts Contact.find_by()
+# contact.update("first_name", "timmy")
+# puts contact2.delete()
+# #puts Contact.create("first_name", "last_name", "msms@m", "note")
+# #puts Contact.all
+# #contact.first_name = "john"
+# puts Contact.find(2) 
+# #puts Contact.find_by()
 
 
