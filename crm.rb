@@ -84,9 +84,8 @@ class CRM
 
   def delete_contact()
     print 'whats the id of the contact to delete? '
-    id = gets.chomp
+    id = gets.chomp.to_i
     contact_info = Contact.find(id)
-    return contact_info
     contact_info.delete()
 
   end
