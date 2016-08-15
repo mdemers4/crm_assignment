@@ -102,20 +102,27 @@ class Contact
 		return "#{@first_name} #{@last_name}"
 	end
 
-	def update(first_name, last_name, email, note)
-		@first_name = first_name
-		@last_name = last_name
-		@email = email
-		@note = note
+	def update(attribute, change)
+		if attribute == "first name"
+			@first_name = change
+		elsif attribute == "last name"
+			@last_name = change
+		elsif attribute == "email"
+			@email = change
+		elsif attribute == "note"
+			@note = change
+		else
+			"attribute does not exist"
+		end
 	end
 
 	def delete()
 		return @@contacts.delete(self)
 	end
-
 end
 
 contact = Contact.new("mitch", "demers", "m@gmail.com")
+contact.update ("first_name", "timmy")
 contact2 = Contact.new("john", "smith", "ms@gmail.com")
 contact3 = Contact.new("jonny", "smither", "mss@gmail.com")
 contact4 = Contact.new("jonnyy", "smithera", "mssa@gmail.com")
