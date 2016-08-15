@@ -32,7 +32,8 @@ class CRM
     when 3 then delete_contact
     when 4 then display_all_contacts
     when 5 then search_by_attribute
-    when 6 then return
+    else  
+      exit
     # Finish off the rest for 3 through 6
     # To be clear, the methods add_new_contact and modify_existing_contact
     # haven't been implemented yet
@@ -59,7 +60,7 @@ class CRM
 
     print 'what attribute would you want to modify: '
     attribute = gets.chomp
-    print 'whats one quality of the person you want to change? '
+    print 'w '
     value = gets.chomp
     contact_info = Contact.find_by(attribute, value)
 
@@ -85,6 +86,7 @@ class CRM
     print 'whats the id of the contact to delete? '
     id = gets.chomp
     contact_info = Contact.find(id)
+    return contact_info
     contact_info.delete()
 
   end
@@ -93,18 +95,25 @@ class CRM
   # and display each contact in that array
   def display_contacts(array_of_contents)
     array_of_contents.each do |content|
-      print content 
+      puts content
+    end
     # HINT: Make use of this method in the display_all_contacts and search_by_attribute methods to keep your code DRY
   end
 
   def display_all_contacts()
     all_contacts = Contact.all
+    return display_contacts(all_contacts)
 
     # HINT: Make use of the display_contacts method to keep your code DRY
   end
 
-  def search_by_attribute
-    
+  def search_by_attribute()
+    puts "enter attribute: "
+    attribute = gets.chomp
+    puts "enter first name, last name, or email of contact"
+    value = gets.chomp
+    contact_info = Contact.find_by(attribute, value)
+    return display_contacts([contact_info.first_name, contact_info.last_name, contact_info.email, contact_info.note])
     # HINT: Make use of the display_contacts method to keep your code DRY
   end
 
@@ -115,7 +124,9 @@ end
 
 crm = CRM.new 
 # puts crm.modify_existing_contact
-
+#crm.search_by_attribute()
+puts crm.delete_contact
+#crm.main_menu
 
 
 
